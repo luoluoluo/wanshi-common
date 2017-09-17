@@ -35,9 +35,9 @@ return [
 
 ### 开始使用
 
-1.上传(客户端向业务服务器请求token->客户端直接像文件服务器上传->业务服务器持久化请求)
+1.上传(客户端向业务服务器请求token->客户端直接像文件服务器上传
 
-* 获取上传token： $res = app('file_client')->url(file_id, params);
+* 获取上传token： $res = app('file_client')->token();
 * 客户端带着token直接上传文件到文件服务器
 
 ```
@@ -49,8 +49,6 @@ return [
     返回：
     file_id
 ```
-
-* 业务服务器持久化数据：app('file_client')->persistence(file_id) //多个file_id 用,隔开
 
 2.下载/查看
 ```

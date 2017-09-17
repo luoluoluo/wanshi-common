@@ -31,19 +31,6 @@ class FileClient{
          ]);
      }
 
-     /**
-      * 持久化文件
-      */
-     public function persistence($ids){
-         $url = '/persistence-file';
-         return $this->request($url, 'PUT', [
-             'form_params' => [
-                 'ids'  => $ids,
-                 'sign' => $this->sign($url, 'PUT', ['ids' => $ids])
-             ]
-         ]);
-     }
-
     /**
      * 删除文件
      */
