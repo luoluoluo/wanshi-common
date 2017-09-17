@@ -21,15 +21,16 @@ class FileClient{
     }
 
     /*
-     * 通过签名获取上传token
+     * 上传
      */
-     public function token(){
-         return $this->request('/token', 'POST', [
-             'form_params' => [
-                 'sign' => $this->sign('/token', 'POST')
-             ]
-         ]);
-     }
+    public function create($file){
+        return $this->request('/file', 'POST', [
+            'form_params' => [
+                'file' => $file,
+                'sign' => $this->sign('/file', 'POST')
+            ]
+        ]);
+    }
 
     /**
      * 删除文件
