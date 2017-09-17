@@ -25,9 +25,15 @@ class FileClient{
      */
     public function create($file){
         return $this->request('/file', 'POST', [
-            'form_params' => [
-                'file' => $file,
-                'sign' => $this->sign('/file', 'POST')
+            'multipart' => [
+                [
+                    'name'     => 'sign',
+                    'contents' => $this->sign('/file', 'POST', ['file'=>$file])
+                ],
+                [
+                    'name'     => 'file',
+                    'contents' => fopen($file, 'r')
+                ]
             ]
         ]);
     }
@@ -57,14 +63,12 @@ class FileClient{
     private function sign($path, $method='GET', $data = []){
         $dataStr = '';
         if(!empty($data)){
+            ksort($data);
             foreach($data as $k=>$v){
                 //文件
                 if(is_file($v)){
                     $v = md5_file($v);
                 }
-            }
-            ksort($data);
-            foreach($data as $k=>$v){
                 $dataStr .= sprintf('[%s:%s]', $k, $v);
             }
         }
